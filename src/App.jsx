@@ -49,7 +49,7 @@ const AppSection = ({ title, index, isEven, description }) => {
         <p>{description}</p>
         <a
           href={downloadLinks[title]}
-          download
+          download={title + ".apk"}  // Adiciona o nome do arquivo com a extensão correta
           className="download-button"
           target="_blank"
           rel="noopener noreferrer"
@@ -67,7 +67,6 @@ const AppSection = ({ title, index, isEven, description }) => {
     </div>
   );
 };
-
 
 const App = () => {
   const [isScrolled, setIsScrolled] = useState(false);
