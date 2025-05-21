@@ -10,26 +10,30 @@ import {
 } from "react-icons/sl";
 import { useIntersectionObserver } from './hooks/useIntersectionObserver';
 
+// Componente para renderizar os cartões de aplicativos
 const AppCard = ({ title, index, onClick }) => (
   <a href={`#${title}`} onClick={onClick}>
     <img 
       className="cards" 
       src={`/img/${index + 2}.jpg`} 
       alt={`App ${title}`}
-      loading="lazy"
+      loading="lazy" // Carregamento preguiçoso para otimizar desempenho
     />
   </a>
 );
 
+// Componente para renderizar as seções de aplicativos
 const AppSection = ({ title, index, isEven, description }) => {
+  // Hook para detectar quando a seção entra na viewport
   const [sectionRef, isVisible] = useIntersectionObserver({
-    threshold: 0.2,
-    triggerOnce: true,
+    threshold: 0.2, // Define o quanto da seção precisa estar visível
+    triggerOnce: true, // Garante que a animação ocorra apenas uma vez
   });
 
+  // Define a classe CSS com base na posição (par ou ímpar)
   const SectionComponent = isEven ? "primary-section" : "secondary-section";
 
-  // Mapeamento dos links de download
+  // Links de download para os aplicativos
   const downloadLinks = {
     "BistrôBox": "/Apps/Bistro-box.apk",
     "BrechóBox": "/Apps/BrechoBox.apk",
@@ -40,16 +44,17 @@ const AppSection = ({ title, index, isEven, description }) => {
 
   return (
     <div
-      ref={sectionRef}
+      ref={sectionRef} // Referência para o hook de interseção
       className={`section ${SectionComponent}`}
       id={title}
     >
+      {/* Texto e botão de download */}
       <div className={`content-text animate-on-scroll ${isVisible ? (isEven ? 'fade-in-left' : 'fade-in-right') : ''}`}>
         <h1>{title}</h1>
         <p>{description}</p>
         <a
-          href={downloadLinks[title]}
-          download={title + ".apk"}  // Adiciona o nome do arquivo com a extensão correta
+          href={downloadLinks[title]} // Link dinâmico baseado no título
+          download={title + ".apk"}  // Nome do arquivo para download
           className="download-button"
           target="_blank"
           rel="noopener noreferrer"
@@ -57,6 +62,7 @@ const AppSection = ({ title, index, isEven, description }) => {
           Baixar {title} App
         </a>
       </div>
+      {/* Imagem da seção */}
       <div className={`content-img animate-on-scroll ${isVisible ? (isEven ? 'fade-in-right' : 'fade-in-left') : ''}`}>
         <img
           src={`/img/${index + 2}.jpg`}
@@ -68,10 +74,12 @@ const AppSection = ({ title, index, isEven, description }) => {
   );
 };
 
+// Componente principal do aplicativo
 const App = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false); // Estado para controlar o cabeçalho fixo
+  const [showScrollTop, setShowScrollTop] = useState(false); // Estado para exibir o botão de voltar ao topo
 
+  // Dados das seções do aplicativo
   const sections = [
     {
       title: 'BistrôBox',
@@ -95,21 +103,24 @@ const App = () => {
     },
   ];
 
+  // Efeito para monitorar o scroll da página
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      setShowScrollTop(window.scrollY > 300);
+      setIsScrolled(window.scrollY > 50); // Atualiza o estado do cabeçalho
+      setShowScrollTop(window.scrollY > 300); // Exibe o botão de voltar ao topo
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll); // Adiciona o evento de scroll
+    return () => window.removeEventListener('scroll', handleScroll); // Remove o evento ao desmontar
   }, []);
 
+  // Função para rolar suavemente até uma seção
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Função para rolar até o topo da página
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -119,6 +130,7 @@ const App = () => {
 
   return (
     <div className='externa'>
+      {/* Cabeçalho fixo */}
       <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
         <div className="content-header">
           <div className="logo">
@@ -136,6 +148,7 @@ const App = () => {
 
       <div className="container">
         <div className="display">
+          {/* Título principal */}
           <div className="display-title">
             <h1 id="title" className="animate-on-scroll fade-in-up">GREEN BOXING</h1>
             <p id="sub-title" className="animate-on-scroll fade-in-up" style={{ animationDelay: '0.2s' }}>
@@ -148,12 +161,14 @@ const App = () => {
               style={{ animationDelay: '0.4s' }}
             />
           </div>
+          {/* Cartões de aplicativos */}
           <div className="img-apps-inline"> 
             {sections.map((section, index) => (
               <AppCard key={index} title={section.title} index={index} onClick={() => scrollToSection(section.title)} />
             ))}
           </div>
 
+          {/* Seções de aplicativos */}
           {sections.map((section, index) => (
             <AppSection 
               key={section.title} 
@@ -166,6 +181,7 @@ const App = () => {
           
         </div>
 
+        {/* Rodapé */}
         <footer className="footer">
           <div className="container-footer">
             <div className="icons">

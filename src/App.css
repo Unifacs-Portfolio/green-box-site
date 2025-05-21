@@ -1,4 +1,5 @@
 /* Reset e Estilos Globais */
+/* Remove margens e paddings padrão, define box-sizing e fonte padrão */
 * {
   padding: 0;
   margin: 0;
@@ -6,6 +7,8 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Estilo para imagens com a classe 'image1' */
+/* Define tamanho fixo, bordas arredondadas e ajusta o conteúdo da imagem */
 .image1 {
   width: 100px; /* Largura da imagem */
   height: 100px; /* Altura da imagem */
@@ -13,13 +16,15 @@
   object-fit: cover; /* Garante que a imagem preencha o espaço */
 }
 
+/* Estilos para o corpo da página */
+/* Define fundo verde, altura mínima, layout flexível e previne scroll horizontal */
 body {
-  background: #009951;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
+  background: #009951; /* Cor de fundo */
+  min-height: 100vh; /* Altura mínima da página */
+  display: flex; /* Layout flexível */
+  flex-direction: column; /* Direção dos itens no eixo principal */
+  margin: 0; /* Remove margens padrão */
+  padding: 0; /* Remove paddings padrão */
   overflow-x: hidden; /* Previne scroll horizontal */
   position: relative; /* Adiciona contexto de posicionamento */
 }
