@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../src/App.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { 
   SlSocialInstagram, 
   SlSocialGithub, 
@@ -37,22 +40,37 @@ const AppSection = ({ title, index, isEven, description }) => {
     "FarmaBox": "/Apps/Farma-Box.apk",
     "VetBox": "/apks/VetBox.apk",
   };
-
+  const backgroundColors = [
+    '#50B454',
+    '#473DA0',
+    '#767676',
+    '#F1CB06',
+    '#87CEEA'
+  ];
+  
   return (
     <div
       ref={sectionRef}
       className={`section ${SectionComponent}`}
       id={title}
+      style={{
+        backgroundColor: isVisible ? backgroundColors[index] : 'transparent',
+        transition: 'background-color 1s ease-in-out'
+      }}
     >
       <div className={`content-text animate-on-scroll ${isVisible ? (isEven ? 'fade-in-left' : 'fade-in-right') : ''}`}>
         <h1>{title}</h1>
         <p>{description}</p>
         <a
           href={downloadLinks[title]}
-          download={title + ".apk"}  // Adiciona o nome do arquivo com a extensão correta
+          download={title + ".apk"}
           className="download-button"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => toast.success(`O download de ${title} foi iniciado!`, {
+    position: "bottom-center",
+    autoClose: 3000
+  })}
         >
           Baixar {title} App
         </a>
@@ -184,7 +202,7 @@ const App = () => {
                 </a>
               </p>
             </div>
-            <div className="content-footer">
+            {/* <div className="content-footer">
               <h3>Explore</h3>
               <p>
                 <a href="#apps">Apps</a> <br />
@@ -192,8 +210,8 @@ const App = () => {
                 <a href="#eco-pontos">Eco pontos</a> <br />
                 <a href="#sobre-nos" onClick={() => scrollToSection('sobre-nos')}>Sobre nós</a> <br />
               </p>
-            </div>
-            <div className="content-footer">
+            </div> */}
+            {/* <div className="content-footer">
               <h3>Recursos</h3>
               <p>
                 <a href="#boas-praticas">Boas práticas</a> <br />
@@ -201,7 +219,7 @@ const App = () => {
                 <a href="#suporte">Suporte</a> <br />
                 <a href="#contato">Fale conosco</a> <br />
               </p>
-            </div>
+            </div> */}
           </div>
         </footer>
       </div>
@@ -214,6 +232,8 @@ const App = () => {
       >
         <SlArrowUp size={20} />
       </button>
+
+       <ToastContainer />
     </div>
   );
 };
