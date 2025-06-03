@@ -450,9 +450,11 @@ body {
   .footer {
     padding: 1rem; /* Reduz padding para telas menores */
   }
+
 }
 
 @media (max-width: 480px) {
+
   .header {
     padding: 1rem;
   }
@@ -483,7 +485,11 @@ body {
   .content-footer h3, .content-footer a {
     font-size: 0.9rem;
   }
+  
+
+
 }
+
 
 @media (max-width: 1024px) {
   .primary-section,
@@ -558,7 +564,7 @@ body {
 }
 
 @media (max-width: 480px) {
-  .header {
+  .header {   
     padding: 0.5rem;
   }
 
@@ -727,4 +733,29 @@ body, #root, .externa {
 
 .fade-in-right {
   animation: fadeInRight 0.8s ease-out forwards;
+}
+
+.language-selector {
+  position: absolute !important;
+  top: 20px !important;
+  right: 20px !important;
+  width: 200px;
+  z-index: 9999 !important;
+}
+
+@media (max-width: 768px) {
+  .language-selector {
+    top: auto !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    left: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .language-selector {
+    bottom: 105px !important;
+    right: 77% !important;
+    transform: translateX(50%) !important;
+  }
 }

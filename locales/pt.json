@@ -1,0 +1,17 @@
+{
+    "init":         {"subTitle":    "Pense fora da caixa e promova um futuro mais sustentavel"},
+
+    "BistroBox":    {"description": "A BistrôBox oferece dicas rápidas sobre consumo consciente e reutilização de alimentos."} ,
+
+    "BrechoBox":    {"description": "BrechóBox conecta você à moda circular com dicas práticas para renovar e reutilizar roupas em desuso."},
+
+    "EngBox":       {"description": "EngBox é uma plataforma de soluções sustentáveis para engenheiros."},
+
+    "FarmaBox":     {"description": "FarmaBox ajuda a gerenciar medicamentos e a evitar desperdícios."},
+    
+    "VetBox":       {"description": "VetBox oferece soluções sustentáveis para cuidados animais e reaproveitamento de compostos orgânicos na agricultura."},
+
+    "download_success":     "O download de {{title}} foi iniciado!",
+
+    "download_button":     "Baixar {{title}} App"
+}

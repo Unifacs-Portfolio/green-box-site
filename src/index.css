@@ -12,6 +12,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.logo{
+  gap: 10rem;
+}
 
 a {
   font-weight: 500;

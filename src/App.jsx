@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import '../src/App.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation, Trans } from 'react-i18next'
+import LanguageSelector from './components/LanguageSelector.jsx';
 
 import { 
   SlSocialInstagram, 
@@ -12,6 +14,7 @@ import {
   SlArrowUp 
 } from "react-icons/sl";
 import { useIntersectionObserver } from './hooks/useIntersectionObserver';
+
 
 const AppCard = ({ title, index, onClick }) => (
   <a href={`#${title}`} onClick={onClick}>
@@ -25,6 +28,7 @@ const AppCard = ({ title, index, onClick }) => (
 );
 
 const AppSection = ({ title, index, isEven, description }) => {
+  const { t } = useTranslation();
   const [sectionRef, isVisible] = useIntersectionObserver({
     threshold: 0.2,
     triggerOnce: true,
@@ -67,12 +71,12 @@ const AppSection = ({ title, index, isEven, description }) => {
           className="download-button"
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => toast.success(`O download de ${title} foi iniciado!`, {
+          onClick={() => toast.success(t('download_success', {title}), {
     position: "bottom-center",
     autoClose: 3000
   })}
         >
-          Baixar {title} App
+          {t('download_button', {title})}
         </a>
       </div>
       <div className={`content-img animate-on-scroll ${isVisible ? (isEven ? 'fade-in-right' : 'fade-in-left') : ''}`}>
@@ -87,31 +91,43 @@ const AppSection = ({ title, index, isEven, description }) => {
 };
 
 const App = () => {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const sections = [
-    {
-      title: 'BistrôBox',
-      description: 'A BistrôBox oferece dicas rápidas sobre consumo consciente e reutilização de alimentos.',
-    },
-    {
-      title: 'BrechóBox',
-      description: 'BrechóBox conecta você à moda circular com dicas práticas para renovar e reutilizar roupas em desuso.',
-    },
-    {
-      title: 'EngBox',
-      description: 'EngBox é uma plataforma de soluções sustentáveis para engenheiros.',
-    },
-    {
-      title: 'FarmaBox',
-      description: 'FarmaBox ajuda a gerenciar medicamentos e a evitar desperdícios.',
-    },
-    {
-      title: 'VetBox',
-      description: 'VetBox oferece soluções sustentáveis para cuidados animais e reaproveitamento de compostos orgânicos na agricultura.',
-    },
+  const Translate = [
+    t('BistroBox.description'),
+    t('BrechoBox.description'),
+    t('EngBox.description'),
+    t('FarmaBox.description'),
+    t('VetBox.description'),
   ];
+
+  const sections = [
+
+    {
+      title: "BistroBox",
+      description: (Translate[0]),
+    },
+
+    {
+      title: "BrechóBox" ,
+       description: (Translate[1]),
+    },
+
+    {
+      title: "EngBox",
+       description: (Translate[2]),
+    },
+
+    {
+      title: "FarmaBox",
+      description: (Translate[3]),    },
+
+    {       title: "VetBox",
+       description: (Translate[4]),
+    },
+      ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -135,21 +151,27 @@ const App = () => {
     });
   };
 
+
+//COLOCAR O BOTÃO AQUI\\
   return (
     <div className='externa'>
       <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
         <div className="content-header">
+
           <div className="logo">
-            <img src="/img/1.jpg" alt="Logo Green Boxing" />
+            <img src="/img/1.jpg" alt="Logo Green Boxing" />            
+          
           </div>
           <h4>GREEN BOXING</h4>
-        </div>
+          </div>
+       
         <nav className="btn-menu">
           <div className="menu">
             <a href="#apps"></a>
             <a href="#comunidade"></a>
           </div>
         </nav>
+
       </header>
 
       <div className="container">
@@ -157,7 +179,7 @@ const App = () => {
           <div className="display-title">
             <h1 id="title" className="animate-on-scroll fade-in-up">GREEN BOXING</h1>
             <p id="sub-title" className="animate-on-scroll fade-in-up" style={{ animationDelay: '0.2s' }}>
-              PENSE FORA DA CAIXA, E PROMOVA UM FUTURO MAIS SUSTENTÁVEL
+            {t('init.subTitle')}
             </p>
             <SlArrowDown 
               size={26} 
@@ -201,25 +223,8 @@ const App = () => {
                   <SlSupport size={22} color="#333" />
                 </a>
               </p>
-            </div>
-            {/* <div className="content-footer">
-              <h3>Explore</h3>
-              <p>
-                <a href="#apps">Apps</a> <br />
-                <a href="#comunidade">Comunidade</a> <br />
-                <a href="#eco-pontos">Eco pontos</a> <br />
-                <a href="#sobre-nos" onClick={() => scrollToSection('sobre-nos')}>Sobre nós</a> <br />
-              </p>
-            </div> */}
-            {/* <div className="content-footer">
-              <h3>Recursos</h3>
-              <p>
-                <a href="#boas-praticas">Boas práticas</a> <br />
-                <a href="#biblioteca">Biblioteca de uso</a> <br />
-                <a href="#suporte">Suporte</a> <br />
-                <a href="#contato">Fale conosco</a> <br />
-              </p>
-            </div> */}
+            </div> 
+            
           </div>
         </footer>
       </div>
@@ -234,7 +239,13 @@ const App = () => {
       </button>
 
        <ToastContainer />
+
+      <div className="language-selector">
+      <LanguageSelector />
+      </div>
+
     </div>
+
   );
 };
 
