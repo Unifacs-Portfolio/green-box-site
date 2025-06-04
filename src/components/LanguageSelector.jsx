@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
 
@@ -33,6 +33,21 @@ const customStyles = {
 
 const LanguageSelector = () => {
   const { i18n } = useTranslation();
+  const [menuPlacement, setMenuPlacement] = useState('bottom');
+
+  useEffect(() => {
+    const updatePlacement = () => {
+      if (window.innerWidth <= 768) {
+        setMenuPlacement('top');
+      } else {
+        setMenuPlacement('bottom');
+      }
+    };
+
+    updatePlacement(); // on mount
+    window.addEventListener('resize', updatePlacement);
+    return () => window.removeEventListener('resize', updatePlacement);
+  }, []);
 
   const handleChangeLanguage = (selectedOption) => {
     if (selectedOption) {
@@ -53,7 +68,7 @@ const LanguageSelector = () => {
         styles={customStyles}
         isSearchable={false}
         placeholder="Idioma"
-        menuPosition="fixed"
+        menuPlacement={menuPlacement} // 👈 this is the key
       />
     </div>
   );

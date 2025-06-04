@@ -754,8 +754,10 @@ body, #root, .externa {
 
 @media (max-width: 480px) {
   .language-selector {
-    bottom: 105px !important;
-    right: 77% !important;
+    position: absolute;
+    bottom: 10px !important;
+    right: 30% !important;
+
     transform: translateX(50%) !important;
   }
 }
