@@ -24,6 +24,11 @@ body {
   position: relative; /* Adiciona contexto de posicionamento */
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 #root {
   max-width: 100%;
   margin: 0;
@@ -83,6 +88,8 @@ body {
   color: #fff;
   margin-left: 1rem;
 }
+
+
 
 .logo img {
   height: 58px;
@@ -356,17 +363,39 @@ body {
   background: #E6E6E6;
   color: #000;
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 2rem 0; 
   height: 300px;
   margin-bottom: -52px;
+   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+
+
 .container-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer .icons {
+  display: flex;
+  gap: 1.5rem; 
+  align-items: center;
+  justify-content: center;
+   margin-top: 2rem;
+}
+
+
+
+/* .container-footer {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 1.5rem;
-}
+} */
 
 .content-footer h3 {
   padding-top: 1rem;
